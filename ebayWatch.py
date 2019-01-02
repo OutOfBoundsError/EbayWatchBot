@@ -56,12 +56,12 @@ def parseTXT():
 #Method to generate ebay accounts and append it into Accounts.txt
 #Limits to 4 accounts per day.
 def generateAccount(numAccount):
-    password = "washedj1"
+    password = "password123" #SET YOUR PASSWORD HERE DEFAULT IS password123
     registerLink = "https://reg.ebay.com/reg/PartialReg?ru=https%3A%2F%2Fwww.ebay.com%2F"
     for i in range(numAccount):
         firstName = randomName()
         lastName = randomName()
-        email = randomCatchall('floppedcart.club')
+        email = randomCatchall('YOURCATCHALL') # ENTER YOUR CATCH-ALL DOMAIN HERE
         driver = webdriver.Chrome()
         driver.get(registerLink)
         driver.find_element_by_name("firstname").send_keys(firstName)
