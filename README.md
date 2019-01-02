@@ -16,6 +16,6 @@ Accounts.txt format must be username:password.
 # TO DO 
 
 - Headless Mode or request based.
-- Implement Threading
+- Implement Threading to increase speed and efficiency.
 - Proxy Support to generate more accounts per day.
-- Discord Support
+- Discord Support.
