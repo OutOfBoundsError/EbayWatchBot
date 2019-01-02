@@ -1,6 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from threading import Thread
 import random
 import string
@@ -9,14 +13,14 @@ import time
 
 def createSession():
     chrome_option = Options()
-    chrome_option.add_argument("--headless")
-    chrome_option.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
+    chrome_option.add_argument("--headless") # Headless mode not done
     driver = webdriver.Chrome()
     return driver
 
 def login(username, password, driver):
     driver.get("https://www.ebay.com/signin")
-    time.sleep(1)
+    element_present = EC.presence_of_element_located((By.ID, 'userid'))
+    WebDriverWait(driver, 1).until(element_present)
     driver.find_element_by_id("userid").send_keys(username)
     driver.find_element_by_id("pass").send_keys(password)
     driver.find_element_by_id("sgnBt").click()
@@ -28,9 +32,9 @@ def login(username, password, driver):
     return True
 
 def addToWatchList(productURL,driver):
-    time.sleep(0.5)
     driver.get(productURL)
-    time.sleep(1)
+    element_present = EC.presence_of_element_located((By.CLASS_NAME, 'vi-atw-txt'))
+    WebDriverWait(driver, 1).until(element_present)
     watchingElement = driver.find_element_by_class_name("vi-atw-txt")
     if ('watching' in watchingElement.text.lower()):
         print('[ERROR] Already Watched. ')
@@ -62,12 +66,13 @@ def generateAccount(numAccount):
         driver.find_element_by_name("lastname").send_keys(lastName)
         driver.find_element_by_name("email").send_keys(email)
         driver.find_element_by_name("PASSWORD").send_keys(password)
-        time.sleep(1)
+        element_present = EC.presence_of_element_located((By.ID, 'ppaFormSbtBtn'))
+        WebDriverWait(driver, 1).until(element_present)
         driver.find_element_by_id("ppaFormSbtBtn").click()
         print("[SUCCESS] Account Created!")
         print("Login: " + email)
         print("Password: " + password)
-        time.sleep(5)
+        time.sleep(5) # Idle time to make sure requests has been successfully created.
         updateAccountsTXT(email, password)
 
 #Method to generate random catchalls
