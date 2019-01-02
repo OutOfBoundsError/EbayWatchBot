@@ -112,7 +112,11 @@ def startWatch(prodLink):
         taskDone = False
         list_of_accounts = parseTXT()
 
-#Main
-link = input('Enter your ebay link: ')
-task(link)
-#generateAccount(7)
+if __name__ == "__main__":
+        wantGen = input("Do you want to generate account? y or n: ")
+        if ('y' in wantGen):
+                numAccount = int(input("How many accounts (Recommended 4): "))
+                generateAccount(numAccount)       
+        else:       
+                link = input('Enter your ebay link: ')
+                task(link)
