@@ -13,7 +13,8 @@ import time
 
 def createSession():
     chrome_option = Options()
-    chrome_option.add_argument("--headless") # Headless mode not done
+    chrome_option.add_argument("--headless")
+    #chrome_option.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
     driver = webdriver.Chrome()
     return driver
 
@@ -32,6 +33,7 @@ def login(username, password, driver):
     return True
 
 def addToWatchList(productURL,driver):
+    #time.sleep(0)
     driver.get(productURL)
     element_present = EC.presence_of_element_located((By.CLASS_NAME, 'vi-atw-txt'))
     WebDriverWait(driver, 1).until(element_present)
@@ -46,7 +48,7 @@ def addToWatchList(productURL,driver):
         driver.quit()
 
 def parseTXT():
-    os.chdir("C:\\####\\#####\\#####\\####\\####") #Change this to the directory where your accounts.txt is located at.
+    os.chdir("C:\\######\\######\\#####\\#####\\#####")
     with open("Accounts.txt") as accountsList:
         accounts = accountsList.read().splitlines()
         return accounts
@@ -54,7 +56,7 @@ def parseTXT():
 #Method to generate ebay accounts and append it into Accounts.txt
 #Limits to 4 accounts per day.
 def generateAccount(numAccount):
-    password = "washedj1" #Set this to whatever password you want
+    password = "washedj1"
     registerLink = "https://reg.ebay.com/reg/PartialReg?ru=https%3A%2F%2Fwww.ebay.com%2F"
     for i in range(numAccount):
         firstName = randomName()
@@ -89,7 +91,7 @@ def randomName():
     return name
 
 def updateAccountsTXT(user, passw):
-    os.chdir("C:\\####\\####\\#####\\Python\\EbayBot") #Change this to the directory with your accounts.txt
+    os.chdir("C:\\####\\#####\\#####\\#####\\#####")
     f = open("Accounts.txt", "a")
     text = user + ":" + passw + "\n"
     f.write(text)
@@ -112,5 +114,6 @@ def startWatch(prodLink):
         list_of_accounts = parseTXT()
 
 #Main
-link = "https://www.ebay.com/itm/123488648701"
+link = input('Enter your ebay link: ')
 task(link)
+#generateAccount(7)
