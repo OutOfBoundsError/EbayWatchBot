@@ -14,7 +14,14 @@ import time
 def createSession():
     chrome_option = Options()
     chrome_option.add_argument("--headless")
-    driver = webdriver.Chrome()
+    chrome_option.add_argument('--disable-gpu') 
+    chrome_option.add_argument('start-maximized')
+    chrome_option.add_argument("--disable-extensions")
+    chrome_option.add_argument('disable-infobars')
+    chrome_option.add_argument('--no-sandbox')
+    
+    driver = webdriver.Chrome(chrome_options=chrome_option) 
+    # driver = webdriver.Chrome() Non headless mode.
     return driver
 
 def login(username, password, driver):
