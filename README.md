@@ -10,12 +10,12 @@ Accounts.txt format must be username:password.
 
 - Account Generator (Only can generate around 5-7 accounts per day).
 - Watch list (Using selenium)
+- Headless Mode
 
 
 
 # TO DO 
 
-- Headless Mode or request based.
 - Implement Threading to increase speed and efficiency.
 - Proxy Support to generate more accounts per day.
 - Discord Support.
